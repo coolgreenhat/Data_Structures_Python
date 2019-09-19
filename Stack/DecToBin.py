@@ -1,0 +1,16 @@
+from Stack.Stack import Stack
+def divide_by_2(dec_number):
+    rem_stack = Stack()
+
+    while dec_number > 0:
+        rem = dec_number % 2
+        rem_stack.push(rem)
+        dec_number = dec_number // 2
+
+    bin_String = ""
+    while not rem_stack.is_empty():
+        bin_String = bin_String + str(rem_stack.pop())
+
+    return bin_String
+
+print(divide_by_2(42))
