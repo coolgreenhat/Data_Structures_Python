@@ -12,6 +12,10 @@ v = u + [5, 3, 10, −2, 1], in which the sum of a vector and list returns
 a new vector. However, the syntax v = [5, 3, 10, −2, 1] + u is illegal.
 Explain how the Vector class definition can be revised so that this syntax
 generates a new vector.
+
+2.12 Implement the mul method for the Vector class of Section 2.3.3, so
+that the expression v 3 returns a new vector with coordinates that are 3
+times the respective coordinates of v.
 """
 class Vector:
     """ Represent a vector in a multidimensional space."""
@@ -67,17 +71,26 @@ class Vector:
             result[j] = -self[j]
         return result
 
+    def __mul__(self):
+        result = Vector(len(self))
+        for j in range(len(self)):
+            result[j] = self[j] * 3
+        return result
+
 if __name__ == '__main__':
-    v1 = Vector(3)
-    v1Values = [10,20,30]
+    v1 = Vector(5)
+    v1Values = [10,20,30,40,50]
     for j in range(len(v1)):
         v1[j] = v1Values[j]
-    u1 = Vector(3)
-    u1Values = [5,15,25]
+    u1 = Vector(5)
+    u1Values = [5,15,25,35,45]
     for j in range(len(u1)):
         u1[j] = u1Values[j]
     lenU1 = len(u1Values)
+    # sum = [5, 3, 10, -2, 1] + v1
+    print(sum)
     print(v1)
     print(u1)
     print(v1.__add__(u1))
     print(u1.__sub__(v1))
+    print(u1.__mul__())
