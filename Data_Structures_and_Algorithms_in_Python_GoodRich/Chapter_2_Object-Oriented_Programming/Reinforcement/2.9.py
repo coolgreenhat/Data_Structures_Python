@@ -16,6 +16,12 @@ generates a new vector.
 2.12 Implement the mul method for the Vector class of Section 2.3.3, so
 that the expression v 3 returns a new vector with coordinates that are 3
 times the respective coordinates of v.
+
+2.13 Implement the rmul method, to provide additional support for syntax 3 * v.
+
+2.14 Implement the mul method for the Vector class of Section 2.3.3, so
+that the expression u v returns a scalar that represents the dot product of
+the vectors, that is, ∑ di=1 u i · v i
 """
 class Vector:
     """ Represent a vector in a multidimensional space."""
@@ -77,6 +83,20 @@ class Vector:
             result[j] = self[j] * 3
         return result
 
+    def __rmul__(self):
+        result = Vector(len(self))
+        for j in range(len(self)):
+            result[j] = 3 * self[j]
+        return result
+
+    def __mul__(self,other):
+        if len(self) != len(other):
+            raise ValueError('dimensions must agree')
+        result = 0
+        for j in range(len(self)):
+            result += self[j] * other[j]
+        return result
+
 if __name__ == '__main__':
     v1 = Vector(5)
     v1Values = [10,20,30,40,50]
@@ -87,10 +107,9 @@ if __name__ == '__main__':
     for j in range(len(u1)):
         u1[j] = u1Values[j]
     lenU1 = len(u1Values)
-    # sum = [5, 3, 10, -2, 1] + v1
-    print(sum)
     print(v1)
     print(u1)
     print(v1.__add__(u1))
     print(u1.__sub__(v1))
-    print(u1.__mul__())
+    # print(u1.__mul__())
+    print(u1.__mul__(v1))
